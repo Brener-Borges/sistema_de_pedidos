@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.brener.sistema_de_pedidos.domain.Categoria;
 import com.brener.sistema_de_pedidos.domain.Cidade;
+import com.brener.sistema_de_pedidos.domain.Cliente;
+import com.brener.sistema_de_pedidos.domain.Endereco;
 import com.brener.sistema_de_pedidos.domain.Estado;
 import com.brener.sistema_de_pedidos.domain.Produto;
+import com.brener.sistema_de_pedidos.domain.enums.TipoCliente;
 import com.brener.sistema_de_pedidos.repositories.CategoriaRepository;
 import com.brener.sistema_de_pedidos.repositories.CidadeRepository;
+import com.brener.sistema_de_pedidos.repositories.ClienteRepository;
+import com.brener.sistema_de_pedidos.repositories.EnderecoRepository;
 import com.brener.sistema_de_pedidos.repositories.EstadoRepository;
 import com.brener.sistema_de_pedidos.repositories.ProdutoRepository;
 
@@ -30,6 +35,12 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaDePedidosApplication.class, args);
@@ -67,6 +78,16 @@ public class SistemaDePedidosApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 	}
 
 }
