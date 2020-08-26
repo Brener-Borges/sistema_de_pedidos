@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.brener.sistema_de_pedidos.domain.Categoria;
+import com.brener.sistema_de_pedidos.dto.CategoriaDTO;
 import com.brener.sistema_de_pedidos.repositories.CategoriaRepository;
 import com.brener.sistema_de_pedidos.services.exceptions.DataIntegrityException;
 import com.brener.sistema_de_pedidos.services.exceptions.ObjectNotFoundException;
@@ -53,5 +54,9 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repository.findAll(pageRequest);
+	}
+	
+	public Categoria fromCategoriaDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
 	}
 }
