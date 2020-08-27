@@ -32,7 +32,7 @@ public class CategoriaResource {
 	private CategoriaService service;
 		
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
 		Categoria obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -77,6 +77,4 @@ public class CategoriaResource {
 		Page<CategoriaDTO> listDTO = list.map(obj -> new CategoriaDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
 	}
-
-	
 }
