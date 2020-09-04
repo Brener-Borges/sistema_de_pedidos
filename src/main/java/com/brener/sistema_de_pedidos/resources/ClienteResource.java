@@ -39,7 +39,7 @@ public class ClienteResource {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Void> insert(@RequestBody ClienteNewDTO objDTO){
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
 		Cliente obj = service.fromClienteDTO(objDTO);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -78,5 +78,4 @@ public class ClienteResource {
 		Page<ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj));
 		return ResponseEntity.ok().body(listDTO);
 	}
-	
 }
