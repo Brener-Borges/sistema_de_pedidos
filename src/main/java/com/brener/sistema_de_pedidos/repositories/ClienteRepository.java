@@ -7,5 +7,5 @@ import com.brener.sistema_de_pedidos.domain.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-
+	Cliente findByEmail(String email);
 }
