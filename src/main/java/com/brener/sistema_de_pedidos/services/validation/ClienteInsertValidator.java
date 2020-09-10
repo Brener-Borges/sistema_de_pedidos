@@ -17,7 +17,7 @@ import com.brener.sistema_de_pedidos.services.validation.utils.BR;
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
 	@Autowired
-	ClienteRepository repository;
+	private ClienteRepository repository;
 	
 	@Override
 	public boolean isValid(ClienteNewDTO objDTO, ConstraintValidatorContext context) {
